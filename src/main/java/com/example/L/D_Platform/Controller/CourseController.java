@@ -1,0 +1,25 @@
+package com.example.L.D_Platform.Controller;
+
+import com.example.L.D_Platform.DTO.CourseDTO;
+import com.example.L.D_Platform.Entity.Course;
+import com.example.L.D_Platform.Service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/courses")
+public class CourseController {
+    @Autowired
+    private CourseService service;
+
+    @PostMapping
+    public CourseDTO addCourse(@RequestBody CourseDTO course){
+        return service.addCourse(course);
+    }
+    @GetMapping
+    public List<CourseDTO> getAllCourses(){
+        return service.getAllCourses();
+    }
+}
