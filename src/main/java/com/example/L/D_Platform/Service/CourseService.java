@@ -20,4 +20,8 @@ public class CourseService {
     public List<CourseDTO> getAllCourses() {
         return courseRepository.findAll().stream().map(courseMapper::toDTO).toList();
     }
+
+    public Course getById(Long courseId) {
+        return courseRepository.findById(courseId).get();
+    }
 }
