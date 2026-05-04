@@ -1,5 +1,6 @@
 package com.example.L.D_Platform.Controller;
 
+import com.example.L.D_Platform.CommonResponse.APIResponse;
 import com.example.L.D_Platform.DTO.CourseDTO;
 import com.example.L.D_Platform.Entity.Course;
 import com.example.L.D_Platform.Service.CourseService;
@@ -15,11 +16,11 @@ public class CourseController {
     private CourseService service;
 
     @PostMapping
-    public CourseDTO addCourse(@RequestBody CourseDTO course){
-        return service.addCourse(course);
+    public APIResponse<?> addCourse(@RequestBody CourseDTO course){
+        return new APIResponse<>(true,"Created",service.addCourse(course));
     }
     @GetMapping
-    public List<CourseDTO> getAllCourses(){
-        return service.getAllCourses();
+    public APIResponse getAllCourses(){
+        return new APIResponse<>(true,"Fetched",service.getAllCourses());
     }
 }
