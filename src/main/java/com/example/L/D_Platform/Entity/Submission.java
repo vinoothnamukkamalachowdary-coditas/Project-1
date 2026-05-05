@@ -16,6 +16,7 @@ public class Submission {
 
     private int score;
     private String status;
+    private String response;
 
     @ManyToOne
     @JoinColumn(name = "assignment_id")

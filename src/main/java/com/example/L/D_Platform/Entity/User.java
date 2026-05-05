@@ -33,5 +33,5 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private boolean is_Bench;
+    private boolean onBench;
 }
