@@ -28,8 +28,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public APIResponse<?> register(@RequestBody UserDTO user){
-//        user.setPassword(encoder.encode(user.getPassword()));
-//        repo.save(user);
         return new APIResponse<>(true,"Registered",service.register(user));
     }
     @PostMapping("/login")
@@ -41,7 +39,7 @@ public class AuthController {
             throw new RuntimeException("Invalid Password");
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(user.getEmail(),user.getRole().name());
 
         return new LoginResponseDTO(token);
     }

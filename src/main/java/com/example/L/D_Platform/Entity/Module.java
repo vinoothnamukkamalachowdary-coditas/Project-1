@@ -1,30 +1,31 @@
 package com.example.L.D_Platform.Entity;
 
-import ch.qos.logback.core.status.Status;
+import com.example.L.D_Platform.Entity.Course;
+import com.example.L.D_Platform.Entity.ModuleProgress;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Enrollment {
+public class Module {
     @Id
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    private User user;
+    private String name;
+    private String link;
 
     @ManyToOne
     private Course course;
 
-    private int progress; // %
+    @OneToMany(mappedBy = "module",cascade = CascadeType.ALL)
+    private List<ModuleProgress> moduleProgress;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
 
-    private boolean certified;
 }

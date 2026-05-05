@@ -1,11 +1,18 @@
 package com.example.L.D_Platform.Util;
 
-import io.jsonwebtoken.*;
+import com.example.L.D_Platform.Entity.Role;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.StringTokenizer;
+
 
 @Component
 public class JwtUtil {
@@ -15,11 +22,15 @@ public class JwtUtil {
 
     private final long EXPIRATION = 1000 * 60 * 60;
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String role) {
+//        List<String>role=new ArrayList<>();
+//        role.add(Role.ROLE_ADMIN.name());
+//        roles.add(Role.ROLE_USER.name());
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .claim("role",role)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

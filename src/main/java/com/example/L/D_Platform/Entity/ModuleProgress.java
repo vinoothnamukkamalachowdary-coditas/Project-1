@@ -9,20 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Submission {
+public class ModuleProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private int score;
-    private String status;
-    private String response;//assignment answer
-
-    @ManyToOne
-    @JoinColumn(name = "assignment_id")
-    private Assignment assignment;
+    private int id;
+    private int completedModules;
+    private int to_Complete;
+    private int totalModules;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "module_id")
+    private Module module;
 }
