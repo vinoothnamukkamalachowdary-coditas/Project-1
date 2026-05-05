@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 public class CourseMapper {
     public Course toEntity(CourseDTO dto){
         Course course = new Course();
-        course.setTitle(course.getTitle());
-        course.setDescription(course.getDescription());
-        course.setDuration(course.getDuration());
+        course.setTitle(dto.getTitle());
+        course.setDescription(dto.getDescription());
+        course.setDuration(dto.getDuration());
         return course;
     }
     public CourseDTO toDTO(Course c){
