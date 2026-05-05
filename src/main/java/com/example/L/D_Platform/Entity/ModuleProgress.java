@@ -13,11 +13,13 @@ public class ModuleProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int completedModules;
-    private int to_Complete;
-    private int totalModules;
+    private boolean completed;
 
     @ManyToOne
     @JoinColumn(name = "module_id")
     private Module module;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

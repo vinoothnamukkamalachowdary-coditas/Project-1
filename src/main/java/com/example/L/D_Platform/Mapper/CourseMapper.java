@@ -11,7 +11,6 @@ public class CourseMapper {
         course.setTitle(course.getTitle());
         course.setDescription(course.getDescription());
         course.setDuration(course.getDuration());
-        course.setLink(course.getLink());
         return course;
     }
     public CourseDTO toDTO(Course c){
@@ -20,7 +19,6 @@ public class CourseMapper {
         courseDTO.setTitle(c.getTitle());
         courseDTO.setDescription(c.getDescription());
         courseDTO.setDuration(c.getDuration());
-        courseDTO.setLink(c.getLink());
         return courseDTO;
     }
 }

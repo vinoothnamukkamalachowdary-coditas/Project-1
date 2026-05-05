@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -34,4 +36,11 @@ public class User {
     private Role role;
 
     private boolean onBench;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Enrollment> enrollments;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<ModuleProgress>  moduleProgress;
+
 }

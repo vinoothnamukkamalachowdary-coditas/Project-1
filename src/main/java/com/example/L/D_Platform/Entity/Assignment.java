@@ -1,22 +1,26 @@
 package com.example.L.D_Platform.Entity;
 
-import com.example.L.D_Platform.Entity.Course;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Assignment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-    private String description;
+    private  String name;
+    private String details;//assignment question details
+    private int maxScore;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
 }

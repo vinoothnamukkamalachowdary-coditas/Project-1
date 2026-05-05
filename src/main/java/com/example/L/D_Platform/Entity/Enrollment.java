@@ -1,6 +1,4 @@
 package com.example.L.D_Platform.Entity;
-
-import ch.qos.logback.core.status.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

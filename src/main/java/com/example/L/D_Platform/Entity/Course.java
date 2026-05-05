@@ -18,7 +18,7 @@ public class Course {
 
     private String title;
     private String description;
-    private int durationDays;
+    private int duration;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Module> modules;

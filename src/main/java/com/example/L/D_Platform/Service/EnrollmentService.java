@@ -31,6 +31,7 @@ public class EnrollmentService {
     }
 
     public List<Enrollment> getEnrollment(Long id) {
+
         return enrollmentRepository.findByUserId(id);
     }
 

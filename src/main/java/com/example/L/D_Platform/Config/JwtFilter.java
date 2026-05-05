@@ -31,7 +31,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getServletPath();
 
-        // ✅ Skip authentication APIs
         if (path.startsWith("/api/auth")) {
             filterChain.doFilter(request, response);
             return;
@@ -42,7 +41,6 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = null;
         String token = null;
 
-        // ✅ Extract JWT token
         if (header != null && header.startsWith("Bearer ")) {
             token = header.substring(7);
             try {
@@ -52,12 +50,10 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
 
-        // ✅ Authenticate user
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            // ✅ Validate token properly
             if (jwtUtil.validateToken(token, userDetails.getUsername())) {
 
                 UsernamePasswordAuthenticationToken auth =
@@ -67,7 +63,6 @@ public class JwtFilter extends OncePerRequestFilter {
                                 userDetails.getAuthorities()
                         );
 
-                // ✅ Attach request details
                 auth.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );

@@ -22,6 +22,7 @@ public class Module {
     private String link;
 
     @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
 
     @OneToMany(mappedBy = "module",cascade = CascadeType.ALL)
