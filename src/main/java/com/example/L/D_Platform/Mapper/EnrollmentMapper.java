@@ -6,10 +6,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EnrollmentMapper {
-    public EnrollmentDTO toDTO(Enrollment e){
-       EnrollmentDTO eDTO=new EnrollmentDTO();
-       eDTO.setCourseId(e.getCourse().getId());
-       eDTO.setUserId(e.getUser().getId());
-       return eDTO;
+
+    public EnrollmentDTO toDTO(Enrollment e) {
+        EnrollmentDTO dto = new EnrollmentDTO();
+        dto.setId(e.getId());
+        dto.setUserId(e.getUser().getId());
+        dto.setCourseId(e.getCourse().getId());
+        dto.setProgress(e.getProgress());
+        dto.setStatus(e.getStatus());
+        dto.setCertified(e.isCertified());
+        dto.setUserName(e.getUser().getName());
+        dto.setCourseTitle(e.getCourse().getTitle());
+        return dto;
     }
 }

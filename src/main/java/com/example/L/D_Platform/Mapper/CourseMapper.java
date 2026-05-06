@@ -21,4 +21,11 @@ public class CourseMapper {
         courseDTO.setDuration(c.getDuration());
         return courseDTO;
     }
+    // updates only fields that are provided (not null)
+    public void updateEntity(Course course, CourseDTO dto) {
+        if (dto.getTitle() != null) course.setTitle(dto.getTitle());
+        if (dto.getDescription() != null) course.setDescription(dto.getDescription());
+        if (dto.getDuration() > 0) course.setDuration(dto.getDuration());
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.L.D_Platform.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +22,10 @@ public class Course {
     private int duration;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Module> modules;
 
     @OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Assignment assignment;
 }

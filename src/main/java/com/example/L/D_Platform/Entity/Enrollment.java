@@ -1,4 +1,5 @@
 package com.example.L.D_Platform.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,7 @@ public class Enrollment {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 
     @ManyToOne

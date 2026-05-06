@@ -5,39 +5,60 @@ import com.example.L.D_Platform.Entity.Course;
 import com.example.L.D_Platform.Entity.Enrollment;
 import com.example.L.D_Platform.Entity.User;
 import com.example.L.D_Platform.Exception.ResourceNotFound;
+import com.example.L.D_Platform.Mapper.EnrollmentMapper;
 import com.example.L.D_Platform.Repository.EnrollmentRepository;
 import com.example.L.D_Platform.Repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public class EnrollmentService {
-    @Autowired
-    private EnrollmentRepository enrollmentRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CourseService service;
+import java.util.stream.Collectors;
 
-    public Enrollment enrollment(EnrollmentDTO enroll) {
-        User user = userRepository.findById(enroll.getUserId()).get();
-        Course c = service.getById(enroll.getCourseId());
+@Service
+@RequiredArgsConstructor
+public class EnrollmentService {
+
+    private final EnrollmentRepository enrollmentRepository;
+    private final UserRepository userRepository;
+    private final CourseService courseService;
+    private final EnrollmentMapper enrollmentMapper;
+
+    // POST /api/enrollments
+    public EnrollmentDTO enrollment(EnrollmentDTO dto) {
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(() -> new ResourceNotFound("User not found: " + dto.getUserId()));
+
+        Course course = courseService.getById(dto.getCourseId());
+
         Enrollment enrollment = new Enrollment();
         enrollment.setUser(user);
-        enrollment.setCourse(c);
+        enrollment.setCourse(course);
         enrollment.setProgress(0);
-        return enrollmentRepository.save(enrollment);
+        enrollment.setCertified(false);
+
+        return enrollmentMapper.toDTO(enrollmentRepository.save(enrollment));
     }
 
-    public List<Enrollment> getEnrollment(Long id) {
+    // GET /api/enrollments/user/{id}
+    public List<EnrollmentDTO> getEnrollment(Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFound("User not found: " + userId));
 
-        return enrollmentRepository.findByUserId(id);
+        return enrollmentRepository.findByUserId(userId)
+                .stream()
+                .map(enrollmentMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public void updateProgress(Long id, int progress) {
-        Enrollment enrollment = enrollmentRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Enrollment Not Found"));
+    // PUT /api/enrollments/{id}/progress
+    public EnrollmentDTO updateProgress(Long enrollmentId, int progress) {
+        if (progress < 0 || progress > 100) {
+            throw new IllegalArgumentException("Progress must be between 0 and 100");
+        }
+        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
+                .orElseThrow(() -> new ResourceNotFound("Enrollment not found: " + enrollmentId));
+
         enrollment.setProgress(progress);
-        enrollmentRepository.save(enrollment);
+        return enrollmentMapper.toDTO(enrollmentRepository.save(enrollment));
     }
 }

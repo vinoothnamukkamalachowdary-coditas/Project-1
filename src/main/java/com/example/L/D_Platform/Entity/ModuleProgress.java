@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ModuleProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private boolean completed;
 
     @ManyToOne
