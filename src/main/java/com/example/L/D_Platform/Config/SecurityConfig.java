@@ -39,29 +39,29 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll()
 
                         // ── Courses (ADMIN only) ─────────────────────────────
-                        .requestMatchers("/api/courses/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/v1/courses/**").hasAuthority("ROLE_ADMIN")
 
                         // ── Enrollments ──────────────────────────────────────
-                        .requestMatchers(HttpMethod.POST, "/api/enrollments").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.GET,  "/api/enrollments/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.PUT,  "/api/enrollments/*/progress").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/enrollments").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,  "/api/v1/enrollments/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT,  "/api/v1/enrollments/*/progress").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                         // ── Assignments (ADMIN only) ─────────────────────────
-                        .requestMatchers("/api/assignments/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/v1/assignments/**").hasAuthority("ROLE_ADMIN")
 
                         // ── Submissions ──────────────────────────────────────
-                        .requestMatchers(HttpMethod.POST, "/api/submissions").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.GET,  "/api/submissions").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/submissions").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,  "/api/v1/submissions").hasAuthority("ROLE_ADMIN")
 
                         // ── Modules ──────────────────────────────────────────
-                        .requestMatchers(HttpMethod.POST, "/modules").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.GET,  "/modules").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/v1/modules").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,  "/v1/modules").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                         // ── Module Progress (USER only) ──────────────────────
-                        .requestMatchers(HttpMethod.POST, "/progress").hasAuthority("ROLE_USER")
+                        .requestMatchers(HttpMethod.POST, "/v1/progress").hasAuthority("ROLE_USER")
 
                         // ── Certificates (ADMIN only) ────────────────────────
-                        .requestMatchers("/certificates/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/v1/certificates/**").hasAuthority("ROLE_ADMIN")
 
                         // ── Anything else needs login ────────────────────────
                         .anyRequest().authenticated()

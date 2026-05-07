@@ -3,6 +3,7 @@ package com.example.L.D_Platform.Service;
 import com.example.L.D_Platform.DTO.EnrollmentDTO;
 import com.example.L.D_Platform.Entity.Course;
 import com.example.L.D_Platform.Entity.Enrollment;
+import com.example.L.D_Platform.Entity.Status;
 import com.example.L.D_Platform.Entity.User;
 import com.example.L.D_Platform.Exception.ResourceNotFound;
 import com.example.L.D_Platform.Mapper.EnrollmentMapper;
@@ -35,6 +36,7 @@ public class EnrollmentService {
         enrollment.setCourse(course);
         enrollment.setProgress(0);
         enrollment.setCertified(false);
+        enrollment.setStatus(Status.NOT_STARTED);
 
         return enrollmentMapper.toDTO(enrollmentRepository.save(enrollment));
     }

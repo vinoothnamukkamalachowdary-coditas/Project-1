@@ -3,6 +3,7 @@ package com.example.L.D_Platform.Controller;
 import com.example.L.D_Platform.CommonResponse.APIResponse;
 import com.example.L.D_Platform.DTO.ModuleDTO;
 import com.example.L.D_Platform.Service.ModuleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/modules")
+@RequestMapping("/v1/modules")
 @RequiredArgsConstructor
 public class ModuleController {
 
@@ -18,7 +19,7 @@ public class ModuleController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public APIResponse<ModuleDTO> create(@RequestBody ModuleDTO dto) {
+    public APIResponse<ModuleDTO> create(@Valid @RequestBody ModuleDTO dto) {
         return new APIResponse<>(true, "Module Creation Done",service.create(dto));
     }
 

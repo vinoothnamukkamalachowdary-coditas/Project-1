@@ -3,20 +3,21 @@ package com.example.L.D_Platform.Controller;
 import com.example.L.D_Platform.CommonResponse.APIResponse;
 import com.example.L.D_Platform.DTO.CourseDTO;
 import com.example.L.D_Platform.Service.CourseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/courses")
+@RequestMapping("/api/v1/courses")
 @RequiredArgsConstructor
 public class CourseController {
 
     private final CourseService service;
 
     @PostMapping
-    public APIResponse<CourseDTO> addCourse(@RequestBody CourseDTO course) {
+    public APIResponse<CourseDTO> addCourse(@Valid @RequestBody CourseDTO course) {
         return new APIResponse<>(true, "Course created", service.addCourse(course));
     }
 

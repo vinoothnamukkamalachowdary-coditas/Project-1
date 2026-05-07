@@ -3,19 +3,20 @@ package com.example.L.D_Platform.Controller;
 import com.example.L.D_Platform.CommonResponse.APIResponse;
 import com.example.L.D_Platform.DTO.SubmissionDTO;
 import com.example.L.D_Platform.Service.SubmissionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/submissions")
+@RequestMapping("/api/v1/submissions")
 @RequiredArgsConstructor
 public class SubmissionController {
     private final SubmissionService service;
 
     @PostMapping
-    public APIResponse<SubmissionDTO> submit(@RequestBody SubmissionDTO submissionDTO) {
+    public APIResponse<SubmissionDTO> submit(@Valid @RequestBody SubmissionDTO submissionDTO) {
         return new APIResponse<>(true, "Assignment Submitted",service.submit(submissionDTO));
     }
 

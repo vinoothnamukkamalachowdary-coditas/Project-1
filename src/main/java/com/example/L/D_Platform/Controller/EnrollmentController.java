@@ -3,20 +3,21 @@ package com.example.L.D_Platform.Controller;
 import com.example.L.D_Platform.CommonResponse.APIResponse;
 import com.example.L.D_Platform.DTO.EnrollmentDTO;
 import com.example.L.D_Platform.Service.EnrollmentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/enrollments")
+@RequestMapping("/api/v1/enrollments")
 @RequiredArgsConstructor
 public class EnrollmentController {
 
     private final EnrollmentService service;
 
     @PostMapping
-    public APIResponse<EnrollmentDTO> enrollment(@RequestBody EnrollmentDTO enroll) {
+    public APIResponse<EnrollmentDTO> enrollment(@Valid @RequestBody EnrollmentDTO enroll) {
         return new APIResponse<>(true, "Enrolled successfully", service.enrollment(enroll));
     }
 
@@ -30,4 +31,6 @@ public class EnrollmentController {
                                                      @RequestParam int progress) {
         return new APIResponse<>(true, "Progress updated", service.updateProgress(id, progress));
     }
+
+
 }

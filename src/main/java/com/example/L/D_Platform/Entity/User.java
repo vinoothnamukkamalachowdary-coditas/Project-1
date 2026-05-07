@@ -40,11 +40,9 @@ public class User {
     private boolean onBench;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<ModuleProgress>  moduleProgress;
 
 }

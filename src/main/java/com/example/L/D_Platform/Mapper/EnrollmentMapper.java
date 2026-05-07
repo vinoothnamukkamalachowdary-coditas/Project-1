@@ -19,4 +19,5 @@ public class EnrollmentMapper {
         dto.setCourseTitle(e.getCourse().getTitle());
         return dto;
     }
+
 }

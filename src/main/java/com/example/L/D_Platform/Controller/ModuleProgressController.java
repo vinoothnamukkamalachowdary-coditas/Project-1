@@ -3,6 +3,7 @@ package com.example.L.D_Platform.Controller;
 import com.example.L.D_Platform.CommonResponse.APIResponse;
 import com.example.L.D_Platform.DTO.ModuleProgressDTO;
 import com.example.L.D_Platform.Service.ModuleProgressService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/progress")
+@RequestMapping("/v1/progress")
 @RequiredArgsConstructor
 public class ModuleProgressController {
 
@@ -19,7 +20,7 @@ public class ModuleProgressController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public APIResponse<ModuleProgressDTO> complete(@RequestBody ModuleProgressDTO dto) {
+    public APIResponse<ModuleProgressDTO> complete(@Valid @RequestBody ModuleProgressDTO dto) {
         return new APIResponse<>(true,"Progress Tracked",service.complete(dto));
     }
 }

@@ -9,6 +9,7 @@ import com.example.L.D_Platform.Exception.ResourceNotFound;
 import com.example.L.D_Platform.Repository.UserRepository;
 import com.example.L.D_Platform.Service.AuthService;
 import com.example.L.D_Platform.Util.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,11 +28,11 @@ public class AuthController {
     private PasswordEncoder encoder;
 
     @PostMapping("/register")
-    public APIResponse<?> register(@RequestBody UserDTO user){
+    public APIResponse<?> register(@Valid @RequestBody UserDTO user){
         return new APIResponse<>(true,"Registered",service.register(user));
     }
     @PostMapping("/login")
-    public LoginResponseDTO login(@RequestBody LoginDTO dto){
+    public LoginResponseDTO login(@Valid @RequestBody LoginDTO dto){
 
         User user = service.findByUsername(dto.getUsername());
 
